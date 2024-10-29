@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BG color changer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+</head>
+<body>
+    <div class="color-panel">
+        <div class="color-selectors" id="red" style="background-color: red;">Red</div>
+        <div class="color-selectors" id="blue" style="background-color: rgb(79, 79, 241);">Blue</div>
+        <div class="color-selectors" id="green" style="background-color: rgb(36, 243, 36);">Green</div>
+        <div class="color-selectors" id="yellow" style="background-color: yellow;">Yellow</div>
+        <div class="color-selectors" id="pink" style="background-color: pink;">Pink</div>
+        <div class="color-selectors" id="default" style="background-color: white;">Default</div>
+        <div class="color-selectors" id="customColor" style="display: flex;  justify-content: space-between;">Custom <input type="color" name="" id="" value="#000"></div>
+        
+    </div>    
+</body>
+<script>
+const colorMapping = {
+    red: 'red',
+    blue: 'rgb(79, 79, 241)',
+    green: 'rgb(36, 243, 36)',
+    yellow: 'yellow',
+    pink: 'pink',
+    default: 'white'
+}
+
+document.querySelector(".color-panel").addEventListener("click", (e) => {
+    const selectedColor = colorMapping[e.target.id];
+    if(selectedColor){
+        document.body.style.background = selectedColor
+    }
+})
+
+const customColorPicker = document.getElementById('customColor');
+        customColorPicker.addEventListener('input', (event) => {
+            document.body.style.backgroundColor = event.target.value;
+        });
+
+</script>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-style: normal;
+    }
+.color-panel{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(245, 245, 245);
+    width: 200px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.color-selectors{
+    padding: 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: rgb(214, 211, 211) 0px 3px 14px;
+}
+
+
+</style>
+</html>
