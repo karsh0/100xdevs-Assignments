@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Go</title>
+    <script type="module" src="main.js"></script>
+  </head>
+  <body style="background: #303030;">
+    <div class="container">
+      <h2 style="margin: 10px">Pokemon Go</h2>
+      <div class="data-container">
+        <input type="text" placeholder="Enter your Pokemon number" />
+        <button class="button">SEARCH</button>
+      </div>
+      <div class="output-container" id="output-container" style="margin: 20px; " >
+        
+      </div>
+    </div>
+  </body>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      font-weight: 600;
+      font-style: normal;
+    }
+    .container {
+      padding: 20px;
+      gap: 10px;
+      width: 500px;
+      max-width: 500px;
+      border: none;
+      border-radius: 10px;
+      background-color: rgb(249, 74, 74);
+      margin: 200px auto;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+    .data-container {
+      height: 45px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 20px;
+    }
+    input {
+      height: 100%;
+      padding: 0 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: rgb(52, 223, 22);
+      height: 100%;
+      padding: 10px 30px;
+      cursor: pointer;
+      border: none;
+      width: 200px;
+      border-radius: 10px;
+      font-size: 20px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+  </style>
+</html>
