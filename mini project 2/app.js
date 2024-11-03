@@ -95,6 +95,34 @@ app.get('/profile', authMiddleware, async(req, res) => {
   }
 });
 
+app.get('/like/:id', authMiddleware, async(req, res) => {
+  try{
+    const foundPost = await postModel.findOne({ _id: req.params.id }).populate('user')
+    if(foundPost.likes.indexOf(req.user.userId) == -1){
+        foundPost.likes.push(req.user.userId);
+    }
+    else{
+        foundPost.likes.splice(foundPost.likes.indexOf(req.user.userId), 1);
+    }
+    await foundPost.save()
+    res.redirect('/profile')
+  }
+  catch(e){
+    console.log(e)
+    res.redirect('/profile')
+  }
+});
+
+app.get('/edit/:id', authMiddleware, async(req, res) => {
+    const post = await postModel.findOne({_id:req.params.id}) ;
+    res.render('edit', {post})
+});
+
+app.post('/edit/:id', authMiddleware , async(req,res)=>{
+    const {content} = req.body;
+    await postModel.findOneAndUpdate({_id:req.params.id},{content}) ;
+    res.redirect('/profile')
+})
 
 app.post('/post', authMiddleware, async(req,res)=>{
     let user = await userModel.findOne({_id: req.user.userId})
@@ -105,7 +133,6 @@ app.post('/post', authMiddleware, async(req,res)=>{
     })
     user.posts.push(post._id)
     await user.save()
-    console.log(post)
     res.redirect('/profile')
 })
 
