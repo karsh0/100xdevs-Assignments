@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="container bg-zinc-800 min-h-screen w-full flex justify-center items-center text-black">
+        <form action="/task/register" method="POST" class="flex flex-col gap-2 w-[300px]">
+            <h2 class="flex justify-center text-2xl font-bold text-white">Create Todo</h2>
+            <input class="rounded-xl py-2 px-5 w-full" name="title" type="text" placeholder="Title.." required>
+            <input class="rounded-xl py-2 px-5 w-full" name="level" type="text" placeholder="Difficulty?" required>
+            <textarea class="rounded-xl py-2 px-5 w-full" name="content" rows="5" placeholder="What's on your mind?" required></textarea>
+            <input class="bg-blue-600 rounded-2xl px-4 py-2 w-full text-white" type="submit" value="Create Todo">
+        </form>
+    </div>
+</body>
+</html>

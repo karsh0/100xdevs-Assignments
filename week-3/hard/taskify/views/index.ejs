@@ -10,48 +10,96 @@
     <div class="bg-zinc-800 text-white flex justify-between min-h-screen w-full ">
     <div class="todo p-2 bg-zinc-800 flex-1 ">
         <h1 class="text-bold text-2xl mb-2">Todo</h1>
-        <div class="task">
-            <section class="p-5 border-2 border-zinc-600 rounded-xl">
-                <h2 class="text-bold text-xl ">todo</h2>
-                <h3 class="text-zinc-400 mt-2 mb-2">gibberesh</h3>
-                <span class="text-sm  px-2 py-1 bg-orange-600 rounded-2xl">Medium</span>
-            </section>
+        <div class="section">
+            <% tasks.map((task)=> { %>
+                <div class="section">
+                    <div class="task p-5 border-2 border-zinc-600 rounded-xl  mt-2" data-status="todo" draggable="true">
+                        <h2 class="text-bold text-xl "><%= task.title %></h2>
+                        <h3 class="text-zinc-400 mt-2 mb-2"><%= task.content %></h3>
+                        <span class="text-sm  px-2 py-1 bg-orange-600 rounded-2xl"><%= task.level %></span>
+                    </div>
+                </div>
+           <% }) %>
         </div>
         <div class="addTodo mt-4 w-full">
-            <a href="/create" class="w-full inline-block px-5 py-2 bg-blue-600 rounded-2xl">Add new</a>
+            <a href="/task" class="w-full inline-block px-5 py-2 bg-blue-600 rounded-2xl">Add new</a>
         </div>
     </div>
     <div class="todo p-2 bg-zinc-800 flex-1 ">
         <h1 class="text-bold text-2xl mb-2">In Progress</h1>
-        <div class="task">
-            <section class="p-5 border-2 border-zinc-600 rounded-xl">
+        <div class="section">
+            <div class="task p-5 border-2 border-zinc-600 rounded-xl" data-status="in-progress" draggable="true">
                 <h2 class="text-bold text-xl ">todo</h2>
                 <h3 class="text-zinc-400 mt-2 mb-2">gibberesh</h3>
                 <span class="text-sm  px-2 py-1 bg-orange-600 rounded-2xl">Medium</span>
-            </section>
+            </div>
         </div>
     </div>
     <div class="todo p-2 bg-zinc-800 flex-1 ">
         <h1 class="text-bold text-2xl mb-2">Under Review</h1>
-        <div class="task">
-            <section class="p-5 border-2 border-zinc-600 rounded-xl">
+        <div class="section">
+            <div class="task p-5 border-2 border-zinc-600 rounded-xl" data-status="under-review" draggable="true">
                 <h2 class="text-bold text-xl ">todo</h2>
                 <h3 class="text-zinc-400 mt-2 mb-2">gibberesh</h3>
                 <span class="text-sm  px-2 py-1 bg-orange-600 rounded-2xl">Medium</span>
-            </section>
+            </div>
         </div>
     </div>
     <div class="todo p-2 bg-zinc-800 flex-1 ">
         <h1 class="text-bold text-2xl mb-2">Finished</h1>
-        <div class="task">
-            <section class="p-5 border-2 border-zinc-600 rounded-xl">
+        <div class="section">
+            <div class="task p-5 border-2 border-zinc-600 rounded-xl" data-status="finished" draggable="true">
                 <h2 class="text-bold text-xl ">todo</h2>
                 <h3 class="text-zinc-400 mt-2 mb-2">gibberesh</h3>
                 <span class="text-sm  px-2 py-1 bg-orange-600 rounded-2xl">Medium</span>
-            </section>
+            </div>
         </div>
     </div>
-
     </div>
 </body>
+
+<script>
+let sections = document.querySelectorAll('.section')
+let tasks = document.querySelectorAll('.task')
+
+tasks.forEach(task => {
+    task.addEventListener('dragstart', dragStart);
+    task.addEventListener('dragend', dragEnd);
+  });
+
+  sections.forEach(section => {
+    section.addEventListener('dragover', dragOver);
+    section.addEventListener('drop', drop);
+  });
+
+
+  function dragStart(event) {
+  event.dataTransfer.setData('text/plain', event.target.innerHTML);
+  event.target.classList.add('dragging');
+}
+
+function dragEnd(event) {
+  event.target.classList.remove('dragging');
+}
+
+function dragOver(event) {
+  event.preventDefault();
+}
+
+function drop(event) {
+  event.preventDefault();
+  const data = event.dataTransfer.getData('text/plain');
+  const task = document.createElement('div');
+  task.classList.add('task');
+  task.innerHTML = data;
+  task.setAttribute('draggable', 'true');
+  task.addEventListener('dragstart', dragStart);
+  task.addEventListener('dragend', dragEnd);
+  
+  event.target.appendChild(task);
+}
+
+
+</script>
+
 </html>
