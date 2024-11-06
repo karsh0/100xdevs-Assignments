@@ -1,14 +1,24 @@
 const { Router } = require("express");
 const adminMiddleware = require("../middleware/user");
 const router = Router();
+const {User, Todo} = require('../database')
 
 // todo Routes
-router.post('/', (req, res) => {
-    // Implement todo creation logic
+router.post('/', async(req, res) => {
+    const {title, content} = req.body;
+    await Todo.create({
+        title,content
+    })
+    res.json({message:"post created"})
 });
 
-router.put('/', adminMiddleware, (req, res) => {
-    // Implement update todo  logic
+router.put('/', adminMiddleware, async(req, res) => {
+    const {title, content} = req.body;
+    console.log(req.user)
+    await Todo.findOneAndUpdate({
+        title,content,
+    })
+    res.json({message:"post created"})
 });
 
 router.delete('/', adminMiddleware, (req, res) => {

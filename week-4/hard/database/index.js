@@ -1,16 +1,21 @@
 const mongoose = require('mongoose');
+const env = require('dotenv')
+env.config();
 
 // Connect to MongoDB
-mongoose.connect('your-mongodb-url');
+mongoose.connect(process.env.MONGO_URL);
 
 // Define schemas
 
 const UserSchema = new mongoose.Schema({
-    // Schema definition here
+    email:String,
+    username:String,
+    password:String
 });
 
 const TodoSchema = new mongoose.Schema({
-    // Schema definition here
+    title:String,
+    content:String
 });
 
 const User = mongoose.model('User', UserSchema);
