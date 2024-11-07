@@ -1,10 +1,10 @@
 const { Router } = require("express");
-const adminMiddleware = require("../middleware/user");
+const userMiddleware = require("../middleware/user");
 const router = Router();
 const {User, Todo} = require('../database')
 
 // todo Routes
-router.post('/', async(req, res) => {
+router.post('/', userMiddleware ,async(req, res) => {
     const {title, content} = req.body;
     await Todo.create({
         title,content
@@ -12,29 +12,29 @@ router.post('/', async(req, res) => {
     res.json({message:"post created"})
 });
 
-router.put('/', adminMiddleware, async(req, res) => {
+router.put('/', userMiddleware, async(req, res) => {
     const {title, content} = req.body;
     console.log(req.user)
     await Todo.findOneAndUpdate({
         title,content,
     })
-    res.json({message:"post created"})
+    res.json({message:"post updated"})
 });
 
-router.delete('/', adminMiddleware, (req, res) => {
+router.delete('/', userMiddleware, (req, res) => {
     // Implement delete todo logic
 });
 
-router.delete('/:id', adminMiddleware, (req, res) => {
+router.delete('/:id', userMiddleware, (req, res) => {
     // Implement delete todo by id logic
 });
 
 
-router.get('/', adminMiddleware, (req, res) => {
+router.get('/', userMiddleware, (req, res) => {
     // Implement fetching all todo logic
 });
 
-router.get('/:id', adminMiddleware, (req, res) => {
+router.get('/:id', userMiddleware, (req, res) => {
     // Implement fetching todo by id logic
 });
 

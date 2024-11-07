@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken')
 // User Routes
 router.post('/signup', async(req, res) => {
     const {email,username,password} = req.body;
-    const user = await User.findOne({email})
+    const user = await User.findOne({email: email.toString()})
     if(user){
         res.send("user already exists")
     }
@@ -19,7 +19,7 @@ router.post('/signup', async(req, res) => {
     })
 });
 
-router.post('/login', async(req, res) => {
+router.post('/login',async(req, res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email});
     if(user && password == user.password){
