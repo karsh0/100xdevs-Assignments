@@ -32,7 +32,6 @@ router.post('/login',async(req, res) => {
 });
 
 router.get('/todos', userMiddleware, (req, res) => {
-    // Implement logic for getting todos for a user
     res.json({message:"todos"})
 });
 
