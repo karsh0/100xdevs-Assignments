@@ -36,7 +36,6 @@ router.get('/todos', userMiddleware, (req, res) => {
 });
 
 router.post('/logout', userMiddleware, (req, res) => {
-    // Implement logout logic
 });
 
 module.exports = router
