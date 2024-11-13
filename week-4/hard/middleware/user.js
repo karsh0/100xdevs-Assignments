@@ -2,11 +2,8 @@ const jwt = require('jsonwebtoken');
 const env = require('dotenv');
 env.config();
 
-const { User } = require('../database');
-
 async function userMiddleware(req, res, next) {
-    const token = req.localStorage.getItem('token')
-
+    const token = req.headers.token
     if (!token) {
         return res.status(401).json({ message: "Token not provided" });
     }
@@ -15,6 +12,7 @@ async function userMiddleware(req, res, next) {
         console.log(token)
         const verifiedUser = jwt.verify(token, process.env.JWT_SECRET || 'random');
         req.user = verifiedUser;
+        console.log(req.user)
         next();
     } catch (error) {
        res.json({error})

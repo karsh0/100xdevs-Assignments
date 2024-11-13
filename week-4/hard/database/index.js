@@ -15,7 +15,8 @@ const UserSchema = new mongoose.Schema({
 
 const TodoSchema = new mongoose.Schema({
     title:String,
-    content:String
+    content:String,
+    userId:mongoose.Schema.ObjectId
 });
 
 const User = mongoose.model('User', UserSchema);
