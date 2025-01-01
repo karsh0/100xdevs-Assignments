@@ -5,8 +5,8 @@ const app = express();
 
 function logRequests(req, res, next) {
     // write the logic for request log here
-    const requests = req;
-    console.log(requests);
+    const log = `${req.method} ${req.url}`
+    console.log(log);
     next()
 }
 
